@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,7 +16,7 @@
 			$("#produto" + id).remove();
 		}
 	</script>
-
+	<h2><fmt:message key="mensagem.bemvindo"/></h2>
 	<h1>Produtos</h1>
 	<div id="mensagem"></div>
 	<table width="100%">
@@ -31,22 +32,28 @@
 		<c:forEach var="p" varStatus="st" items="${produtoList }">
 			<tr id="produto${p.id }">
 				<td>${st.count }</td>
-				<td>${p.nome}</td>
-				<td>${p.preco}</td>
+				<td>${p.nome.toUpperCase()}</td>
+				<td><fmt:formatNumber value="${p.preco}" type="currency"/></td>
 				<td>${p.descricao}></td>
-				<td>${p.dataInicioVenda.time}</td>
+				<td><fmt:formatDate value="${p.dataInicioVenda.time}" pattern="EEEE, dd 'de' MMMM 'de' yyyy"/></td>
 				<c:choose>
-					<c:when test="${p.usado }">
+					<c:when test="${p.usado }">																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							
 						<td>sim</td>
 					</c:when>
 					<c:otherwise>
 						<td>Nao</td>	
-					</c:otherwise>
+					</c:otherwise>																																																																																																																																																																																																																																																																																																										
 				</c:choose>
 				<td><a href="#" onclick="return removeProduto(${p.id})">Remover</a></td>
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="/produtos/produto/formulario">Adicionar um produto</a>
+	<c:url value="/produto/formulario" var="formularioProduto" />
+	</br>
+	<a href=${formularioProduto }><fmt:message key="mensagem.novoProduto"/></a>
+	</br>
+
+	<c:set var="nome" value="João da Silva" />
+<c:out value="${nome}" />
 </body>
 </html>
