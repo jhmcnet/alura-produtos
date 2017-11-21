@@ -49,11 +49,14 @@
 		</c:forEach>
 	</table>
 	<c:url value="/produto/formulario" var="formularioProduto" />
-	</br>
+	<br>
 	<a href=${formularioProduto }><fmt:message key="mensagem.novoProduto"/></a>
-	</br>
+	<br>
 
 	<c:set var="nome" value="João da Silva" />
 <c:out value="${nome}" />
+
+<c:import url="../_comum/rodape.jsp"></c:import>
+
 </body>
 </html>
